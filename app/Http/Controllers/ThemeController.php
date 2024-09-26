@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreContactRequest;
+use App\Models\Contact;
+use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
 
 class ThemeController extends Controller
@@ -47,9 +49,22 @@ class ThemeController extends Controller
         // ]);
 
         // Separate the validation in Request Class 
-        $validateDate = $request->validated();
-        
+        $validatedData = $request->validated();
 
+        //Create Record -Ramy's Way-
+        // $contact = new Contact();
+        // $contact->first_name = 'mohamed';
+        // $contact->last_name = 'saad';
+        // $contact->email = 'mohamed@yahoo.com';
+        // $contact->message = 'demo message';
+        // $contact->save();
+        
+        //Using Mass Assignment (FILLABLE)
+        Contact::create($validatedData);
+        // dd('success');
+        
+        //redirect to same page
+        return back()->with('success', 'Your Message Has Been Sent Successfully!');
 
     }
 }

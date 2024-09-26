@@ -54,6 +54,11 @@
   
 				<form action="{{ route('theme.contact.store') }}" method="POST">
 					@csrf
+					@if (session('success'))
+						<div class="alert alert-success">
+							{{ session('success') }}
+						</div>
+					@endif
 				  <div class="row">
 					<div class="col-6">
 					  <div class="form-group">
