@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ThemeController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
 Route::controller(ThemeController::class)->name('theme.')->group(function (){
     Route::get('/about','about')->name('about');
     Route::get('/home','home')->name('home');
@@ -28,3 +40,5 @@ Route::controller(ThemeController::class)->name('theme.')->group(function (){
     Route::post('/contact/store','store')->name('contact.store');
     Route::get('/getcontact','showContact')->name('getcontacts');
 });
+
+require __DIR__.'/auth.php';
