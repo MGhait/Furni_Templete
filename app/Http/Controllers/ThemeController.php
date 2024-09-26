@@ -65,6 +65,9 @@ class ThemeController extends Controller
         
         //redirect to same page
         return back()->with('success', 'Your Message Has Been Sent Successfully!');
-
+    }
+    public function showContact() {
+        $contacts = Contact::paginate(5);
+        return view('theme.showcontacts', compact('contacts'));
     }
 }

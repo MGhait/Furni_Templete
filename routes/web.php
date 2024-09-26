@@ -26,4 +26,5 @@ Route::controller(ThemeController::class)->name('theme.')->group(function (){
     Route::get('/services','services')->name('services');
     Route::get('/shop','shop')->name('shop');
     Route::post('/contact/store','store')->name('contact.store');
+    Route::get('/getcontact','showContact')->name('getcontacts');
 });
