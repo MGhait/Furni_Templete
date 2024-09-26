@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreContactRequest;
+use App\Models\Category;
 use App\Models\Contact;
-use Illuminate\Contracts\Support\ValidatedData;
-use Illuminate\Http\Request;
 
 class ThemeController extends Controller
 {
@@ -22,7 +21,8 @@ class ThemeController extends Controller
     }
 
     public function contact() {
-        return view('theme.contact');
+        $categories = Category::all();
+        return view('theme.contact',compact('categories'));
     }
 
     public function home() {

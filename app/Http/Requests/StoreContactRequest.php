@@ -26,6 +26,7 @@ class StoreContactRequest extends FormRequest
             'last_name' => 'required|string',
             'email' => 'required|email',
             'message' => 'required|min:5',
+            'category_id' => 'required|exists:categories,id',
         ];
     }
 
